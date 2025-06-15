@@ -44,24 +44,14 @@ const menuItems = [
     href: "/revenue",
   },
   {
+    title: "Inventory",
+    icon: Package,
+    href: "/inventory",
+  },
+  {
     title: "Customers",
     icon: Users,
     href: "/customers",
-  },
-  {
-    title: "Churn Analysis",
-    icon: TrendingUp,
-    href: "/churn",
-  },
-  {
-    title: "Growth Metrics",
-    icon: LineChart,
-    href: "/growth",
-  },
-  {
-    title: "Performance",
-    icon: Activity,
-    href: "/performance",
   },
   {
     title: "Reports",

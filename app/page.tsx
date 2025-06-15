@@ -8,6 +8,8 @@ import { TrendingUp, TrendingDown, Package, Users, DollarSign, ShoppingCart, Ref
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 import { format } from "date-fns"
 import { Button } from "@/components/ui/button"
+import { AnimatedMetricCard } from "@/components/animated-metric-card"
+import { LiveOrderFeed } from "@/components/live-order-feed"
 
 export default function DashboardPage() {
   const { 
@@ -76,69 +78,39 @@ export default function DashboardPage() {
           </Button>
         </div>
 
-        {/* Key Metrics */}
+        {/* Key Metrics with Animation */}
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-              <DollarSign className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{formatCurrency(metrics.revenue.current)}</div>
-              <p className="text-xs text-muted-foreground">
-                {metrics.revenue.change > 0 ? (
-                  <span className="flex items-center text-green-600">
-                    <TrendingUp className="mr-1 h-3 w-3" />
-                    +{metrics.revenue.change.toFixed(1)}% from last period
-                  </span>
-                ) : (
-                  <span className="flex items-center text-red-600">
-                    <TrendingDown className="mr-1 h-3 w-3" />
-                    {metrics.revenue.change.toFixed(1)}% from last period
-                  </span>
-                )}
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Orders</CardTitle>
-              <ShoppingCart className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{metrics.orders.count}</div>
-              <p className="text-xs text-muted-foreground">
-                Avg. value: {formatCurrency(metrics.orders.avgValue)}
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Active Customers</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{metrics.customers.active}</div>
-              <p className="text-xs text-muted-foreground">
-                {metrics.customers.new} new this period
-              </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Low Stock Items</CardTitle>
-              <Package className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{metrics.inventory.lowStock}</div>
-              <p className="text-xs text-muted-foreground">
-                Require immediate attention
-              </p>
-            </CardContent>
-          </Card>
+          <AnimatedMetricCard
+            title="Total Revenue"
+            value={metrics.revenue.current}
+            previousValue={metrics.revenue.previous}
+            format={formatCurrency}
+            icon={DollarSign}
+            showTrend={true}
+          />
+          
+          <AnimatedMetricCard
+            title="Orders Today"
+            value={metrics.orders.count}
+            previousValue={Math.floor(metrics.orders.count * 0.9)}
+            icon={ShoppingCart}
+            showTrend={true}
+          />
+          
+          <AnimatedMetricCard
+            title="Active Customers"
+            value={metrics.customers.active}
+            previousValue={metrics.customers.active - metrics.customers.new}
+            icon={Users}
+            showTrend={true}
+          />
+          
+          <AnimatedMetricCard
+            title="Low Stock Items"
+            value={metrics.inventory.lowStock}
+            icon={Package}
+            animate={false}
+          />
         </div>
 
         {/* Charts Row */}
@@ -215,36 +187,10 @@ export default function DashboardPage() {
           </Card>
         </div>
 
-        {/* Recent Activity */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
-            <CardDescription>Live feed of store events</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {realtimeEvents.slice(0, 5).map((event) => (
-                <div key={event.id} className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className={`w-2 h-2 rounded-full ${
-                      event.type === 'order' ? 'bg-green-500' :
-                      event.type === 'inventory' ? 'bg-yellow-500' :
-                      event.type === 'customer' ? 'bg-blue-500' :
-                      'bg-gray-500'
-                    }`} />
-                    <div>
-                      <p className="text-sm font-medium">{event.title}</p>
-                      <p className="text-xs text-muted-foreground">{event.description}</p>
-                    </div>
-                  </div>
-                  <p className="text-xs text-muted-foreground">
-                    {format(event.timestamp, 'h:mm a')}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
+        {/* Live Order Feed - Full Width */}
+        <div className="col-span-full">
+          <LiveOrderFeed />
+        </div>
       </div>
     </DashboardLayout>
   )
