@@ -14,8 +14,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "SaaS Analytics Dashboard",
-  description: "Multi-tenant business metrics dashboard with real-time analytics",
+  title: "TechGear Pro - E-commerce Analytics Dashboard",
+  description: "Real-time analytics and insights for electronics retailers. Track revenue, inventory, and customer metrics across all channels.",
 };
 
 export default function RootLayout({

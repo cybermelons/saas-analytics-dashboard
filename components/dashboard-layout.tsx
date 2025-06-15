@@ -96,8 +96,8 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
       <Sidebar>
         <SidebarHeader>
           <div className="flex items-center gap-2 px-2 py-1.5">
-            <BarChart3 className="h-6 w-6" />
-            <span className="font-semibold">SaaS Analytics</span>
+            <BarChart3 className="h-6 w-6 text-blue-600" />
+            <span className="font-semibold text-lg">TechGear Pro</span>
           </div>
         </SidebarHeader>
         <SidebarContent>
