@@ -4,15 +4,17 @@ import { useEffect } from "react"
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useEcommerceStore } from "@/store/ecommerce-store"
-import { TrendingUp, TrendingDown, Package, Users, DollarSign, ShoppingCart } from "lucide-react"
+import { TrendingUp, TrendingDown, Package, Users, DollarSign, ShoppingCart, RefreshCw } from "lucide-react"
 import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 import { format } from "date-fns"
+import { Button } from "@/components/ui/button"
 
 export default function DashboardPage() {
   const { 
     metrics, 
     realtimeEvents, 
     initializeData,
+    clearAllData,
     products,
     orders 
   } = useEcommerceStore();
@@ -53,11 +55,25 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
       <div className="space-y-6">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">TechGear Pro Analytics</h1>
-          <p className="text-muted-foreground">
-            Real-time insights for your electronics retail business
-          </p>
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold tracking-tight">TechGear Pro Analytics</h1>
+            <p className="text-muted-foreground">
+              Real-time insights for your electronics retail business
+            </p>
+          </div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => {
+              clearAllData();
+              setTimeout(() => initializeData(), 100);
+            }}
+            className="gap-2"
+          >
+            <RefreshCw className="h-4 w-4" />
+            Reset Demo Data
+          </Button>
         </div>
 
         {/* Key Metrics */}

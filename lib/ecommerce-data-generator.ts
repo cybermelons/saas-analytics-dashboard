@@ -65,13 +65,16 @@ export function generateProducts(): Product[] {
   } as Product));
 }
 
-// Generate customers with realistic distribution
+// Generate customers with realistic distribution (reduced for localStorage)
 export function generateCustomers(count: number): Customer[] {
   const customers: Customer[] = [];
   const segments: CustomerSegment[] = ['tech-enthusiast', 'business', 'casual', 'student', 'vip'];
   const channels = ['google', 'facebook', 'direct', 'referral', 'email'];
   
-  for (let i = 0; i < count; i++) {
+  // Limit to 200 customers to avoid localStorage quota
+  const actualCount = Math.min(count, 200);
+  
+  for (let i = 0; i < actualCount; i++) {
     const orderCount = Math.floor(Math.random() * 20) + 1;
     const avgOrderValue = Math.random() * 500 + 100;
     const firstPurchase = subDays(new Date(), Math.floor(Math.random() * 730)); // Up to 2 years ago

@@ -38,6 +38,7 @@ interface EcommerceStore {
   setSelectedCategory: (category: string | null) => void;
   addRealtimeEvent: (event: RealtimeEvent) => void;
   refreshMetrics: () => void;
+  clearAllData: () => void;
 }
 
 export const useEcommerceStore = create<EcommerceStore>()(
@@ -59,8 +60,8 @@ export const useEcommerceStore = create<EcommerceStore>()(
       // Initialize demo data
       initializeData: () => {
         const products = generateProducts();
-        const customers = generateCustomers(1000);
-        const orders = generateOrders(90, products, customers); // 90 days of data
+        const customers = generateCustomers(200); // Reduced from 1000
+        const orders = generateOrders(30, products, customers); // Reduced from 90 days
         const realtimeEvents = generateRealtimeEvents();
         
         set({ products, customers, orders, realtimeEvents });
@@ -113,6 +114,18 @@ export const useEcommerceStore = create<EcommerceStore>()(
         const metrics = calculateMetrics(filteredOrders, products, dateRange);
         set({ metrics });
       },
+      
+      // Clear all data
+      clearAllData: () => {
+        localStorage.removeItem('techgear-ecommerce-store');
+        set({
+          products: [],
+          customers: [],
+          orders: [],
+          realtimeEvents: [],
+          metrics: null,
+        });
+      },
     }),
     {
       name: 'techgear-ecommerce-store',
@@ -150,7 +163,20 @@ export const useEcommerceStore = create<EcommerceStore>()(
           };
         },
         setItem: (name, value) => {
-          localStorage.setItem(name, JSON.stringify(value));
+          try {
+            localStorage.setItem(name, JSON.stringify(value));
+          } catch (e) {
+            // Handle quota exceeded error
+            console.warn('localStorage quota exceeded, clearing old data...');
+            localStorage.removeItem(name);
+            try {
+              // Try again with cleared space
+              localStorage.setItem(name, JSON.stringify(value));
+            } catch (e2) {
+              // If still failing, store only essential data
+              console.error('Failed to store data, skipping persistence');
+            }
+          }
         },
         removeItem: (name) => {
           localStorage.removeItem(name);
