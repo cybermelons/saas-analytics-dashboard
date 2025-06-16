@@ -1,6 +1,7 @@
 "use client"
 
 import { PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip } from "recharts"
+import { ValueType } from "recharts/types/component/DefaultTooltipContent"
 
 const data = [
   { name: "Basic", value: 2845, color: "#3b82f6" },
@@ -28,7 +29,10 @@ export function PieChartDemo() {
           ))}
         </Pie>
         <Tooltip 
-          formatter={(value: any) => [value, "Customers"]}
+          formatter={(value: ValueType) => {
+            const numValue = typeof value === 'number' ? value : 0;
+            return [numValue, "Customers"];
+          }}
           contentStyle={{ 
             backgroundColor: "rgba(255, 255, 255, 0.95)",
             border: "1px solid #e0e0e0",

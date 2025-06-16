@@ -3,7 +3,7 @@ import autoTable from "jspdf-autotable"
 
 interface PDFSection {
   title: string
-  data: any[]
+  data: Record<string, unknown>[]
   columns: string[]
 }
 
@@ -82,7 +82,7 @@ export function generatePDF(options: PDFOptions) {
     })
 
     // Update Y position for next section
-    yPosition = (doc as any).lastAutoTable.finalY + 20
+    yPosition = (doc as jsPDF & { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 20
 
     // Add page break if needed
     if (yPosition > 250 && index < options.sections.length - 1) {

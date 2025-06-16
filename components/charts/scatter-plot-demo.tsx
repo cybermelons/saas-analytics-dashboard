@@ -1,6 +1,7 @@
 "use client"
 
 import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts"
+import { ValueType, NameType } from "recharts/types/component/DefaultTooltipContent"
 
 // Generate sample data for CAC vs LTV analysis
 const generateData = () => {
@@ -42,7 +43,10 @@ export function ScatterPlotDemo() {
         />
         <Tooltip 
           cursor={{ strokeDasharray: '3 3' }}
-          formatter={(value: any, name: string) => [`$${value}`, name]}
+          formatter={(value: ValueType, name: NameType) => {
+            const numValue = typeof value === 'number' ? value : 0;
+            return [`$${numValue}`, name];
+          }}
           contentStyle={{ 
             backgroundColor: "rgba(255, 255, 255, 0.95)",
             border: "1px solid #e0e0e0",

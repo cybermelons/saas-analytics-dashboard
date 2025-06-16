@@ -1,6 +1,7 @@
 "use client"
 
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
+import { ValueType } from "recharts/types/component/DefaultTooltipContent"
 
 const data = [
   { month: "Jan", rate: 6.8 },
@@ -34,7 +35,10 @@ export function ChurnRateChart() {
           tickFormatter={(value) => `${value}%`}
         />
         <Tooltip
-          formatter={(value: any) => [`${value}%`, "Churn Rate"]}
+          formatter={(value: ValueType) => {
+            const numValue = typeof value === 'number' ? value : 0;
+            return [`${numValue}%`, "Churn Rate"];
+          }}
           contentStyle={{ 
             backgroundColor: "rgba(255, 255, 255, 0.95)",
             border: "1px solid #e0e0e0",

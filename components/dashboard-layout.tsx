@@ -1,7 +1,6 @@
 "use client"
 
 import { ReactNode } from "react"
-import { cn } from "@/lib/utils"
 import {
   Sidebar,
   SidebarContent,
@@ -23,11 +22,10 @@ import {
   LineChart,
   PieChart,
   Settings,
-  TrendingUp,
   Users,
   DollarSign,
-  Activity,
   Download,
+  Package,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -44,24 +42,14 @@ const menuItems = [
     href: "/revenue",
   },
   {
+    title: "Inventory",
+    icon: Package,
+    href: "/inventory",
+  },
+  {
     title: "Customers",
     icon: Users,
     href: "/customers",
-  },
-  {
-    title: "Churn Analysis",
-    icon: TrendingUp,
-    href: "/churn",
-  },
-  {
-    title: "Growth Metrics",
-    icon: LineChart,
-    href: "/growth",
-  },
-  {
-    title: "Performance",
-    icon: Activity,
-    href: "/performance",
   },
   {
     title: "Reports",
@@ -96,8 +84,8 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
       <Sidebar>
         <SidebarHeader>
           <div className="flex items-center gap-2 px-2 py-1.5">
-            <BarChart3 className="h-6 w-6" />
-            <span className="font-semibold">SaaS Analytics</span>
+            <BarChart3 className="h-6 w-6 text-blue-600" />
+            <span className="font-semibold text-lg">TechGear Pro</span>
           </div>
         </SidebarHeader>
         <SidebarContent>

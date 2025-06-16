@@ -1,6 +1,6 @@
 import Papa from "papaparse"
 
-export function generateCSV(data: any[]): string {
+export function generateCSV(data: Record<string, unknown>[]): string {
   return Papa.unparse(data)
 }
 
