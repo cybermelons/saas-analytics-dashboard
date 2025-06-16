@@ -1,6 +1,7 @@
 "use client"
 
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts"
+import { ValueType } from "recharts/types/component/DefaultTooltipContent"
 
 const data = [
   { month: "Jan", revenue: 85000, projected: 82000 },
@@ -30,7 +31,10 @@ export function RevenueChart() {
           tickFormatter={(value) => `$${(value / 1000).toFixed(0)}k`}
         />
         <Tooltip
-          formatter={(value: any) => [`$${value?.toLocaleString()}`, ""]}
+          formatter={(value: ValueType) => {
+            const numValue = typeof value === 'number' ? value : null;
+            return [`$${numValue?.toLocaleString() || 'N/A'}`, ""];
+          }}
           labelStyle={{ color: "#666" }}
           contentStyle={{ 
             backgroundColor: "rgba(255, 255, 255, 0.95)",

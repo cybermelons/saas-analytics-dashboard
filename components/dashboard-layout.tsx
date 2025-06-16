@@ -1,7 +1,6 @@
 "use client"
 
 import { ReactNode } from "react"
-import { cn } from "@/lib/utils"
 import {
   Sidebar,
   SidebarContent,
@@ -23,11 +22,10 @@ import {
   LineChart,
   PieChart,
   Settings,
-  TrendingUp,
   Users,
   DollarSign,
-  Activity,
   Download,
+  Package,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"

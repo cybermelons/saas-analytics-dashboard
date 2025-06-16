@@ -4,21 +4,18 @@ import { useEffect } from "react"
 import { DashboardLayout } from "@/components/dashboard-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useEcommerceStore } from "@/store/ecommerce-store"
-import { TrendingUp, TrendingDown, Package, Users, DollarSign, ShoppingCart, RefreshCw } from "lucide-react"
-import { LineChart, Line, AreaChart, Area, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
-import { format } from "date-fns"
+import { Package, Users, DollarSign, ShoppingCart, RefreshCw } from "lucide-react"
+import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 import { Button } from "@/components/ui/button"
 import { AnimatedMetricCard } from "@/components/animated-metric-card"
 import { LiveOrderFeed } from "@/components/live-order-feed"
+import { DashboardSkeleton } from "@/components/dashboard-skeleton"
 
 export default function DashboardPage() {
   const { 
     metrics, 
-    realtimeEvents, 
     initializeData,
-    clearAllData,
-    products,
-    orders 
+    clearAllData
   } = useEcommerceStore();
 
   // Initialize data on mount
@@ -31,9 +28,7 @@ export default function DashboardPage() {
   if (!metrics) {
     return (
       <DashboardLayout>
-        <div className="flex items-center justify-center h-96">
-          <p className="text-muted-foreground">Loading dashboard data...</p>
-        </div>
+        <DashboardSkeleton />
       </DashboardLayout>
     );
   }

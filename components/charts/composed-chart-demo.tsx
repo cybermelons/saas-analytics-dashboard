@@ -1,6 +1,7 @@
 "use client"
 
 import { ComposedChart, Area, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts"
+import { ValueType, NameType } from "recharts/types/component/DefaultTooltipContent"
 
 const data = [
   { month: "Jan", revenue: 85000, expenses: 45000, profit: 40000, margin: 47 },
@@ -42,9 +43,10 @@ export function ComposedChartDemo() {
           tickFormatter={(value) => `${value}%`}
         />
         <Tooltip
-          formatter={(value: any, name: string) => {
-            if (name === "Margin") return [`${value}%`, name]
-            return [`$${value?.toLocaleString()}`, name]
+          formatter={(value: ValueType, name: NameType) => {
+            const numValue = typeof value === 'number' ? value : 0;
+            if (name === "Margin") return [`${numValue}%`, name];
+            return [`$${numValue.toLocaleString()}`, name];
           }}
           contentStyle={{ 
             backgroundColor: "rgba(255, 255, 255, 0.95)",

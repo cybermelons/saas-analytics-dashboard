@@ -4,7 +4,7 @@ import { DashboardLayout } from "@/components/dashboard-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useEcommerceStore } from "@/store/ecommerce-store"
 import { useEffect } from "react"
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts"
+import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 import { format, subDays, eachDayOfInterval } from "date-fns"
 
 export default function RevenuePage() {

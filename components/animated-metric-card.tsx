@@ -45,7 +45,7 @@ export function AnimatedMetricCard({
       (val) => setDisplayValue(val),
       () => setIsAnimating(false)
     );
-  }, [value]);
+  }, [value, animate, displayValue]);
 
   const formatValue = format || ((v) => Math.round(v).toLocaleString());
   const change = previousValue ? ((value - previousValue) / previousValue) * 100 : 0;

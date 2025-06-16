@@ -4,7 +4,7 @@ import { DashboardLayout } from "@/components/dashboard-layout"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { useEcommerceStore } from "@/store/ecommerce-store"
 import { useEffect } from "react"
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from "recharts"
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts"
 
 export default function CustomersPage() {
   const { customers, metrics, initializeData } = useEcommerceStore();

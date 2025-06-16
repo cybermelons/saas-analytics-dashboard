@@ -5,12 +5,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useEcommerceStore } from '@/store/ecommerce-store';
 import { RealtimeSimulator } from '@/lib/realtime-simulator';
 import { format } from 'date-fns';
-import { Activity, ShoppingBag, Package, Users, TrendingUp, Circle } from 'lucide-react';
+import { Activity, ShoppingBag, Package, Users, Circle } from 'lucide-react';
 import { RealtimeEvent } from '@/types/ecommerce';
 
 export function LiveOrderFeed() {
-  const { products, customers, addRealtimeEvent, realtimeEvents } = useEcommerceStore();
-  const [isLive, setIsLive] = useState(true);
+  const { products, addRealtimeEvent, realtimeEvents } = useEcommerceStore();
+  const [isLive] = useState(true);
   const [simulator] = useState(() => new RealtimeSimulator());
 
   useEffect(() => {
@@ -20,14 +20,13 @@ export function LiveOrderFeed() {
       (event) => {
         addRealtimeEvent(event);
       },
-      products,
-      customers
+      products
     );
 
     return () => {
       simulator.stop();
     };
-  }, [isLive, products, customers, simulator, addRealtimeEvent]);
+  }, [isLive, products, simulator, addRealtimeEvent]);
 
   const getEventIcon = (type: RealtimeEvent['type']) => {
     switch (type) {

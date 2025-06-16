@@ -1,5 +1,4 @@
-import { RealtimeEvent, Product, Customer, Order } from '@/types/ecommerce';
-import { format } from 'date-fns';
+import { RealtimeEvent, Product } from '@/types/ecommerce';
 
 // Product names for realistic events
 const PRODUCT_SAMPLES = [
@@ -52,7 +51,7 @@ export class RealtimeSimulator {
   private intervalId: NodeJS.Timeout | null = null;
   private eventCount = 0;
 
-  generateEvent(products: Product[], customers: Customer[]): RealtimeEvent {
+  generateEvent(products: Product[]): RealtimeEvent {
     const types: RealtimeEvent['type'][] = ['order', 'inventory', 'customer', 'order'];
     const type = types[Math.floor(Math.random() * types.length)];
     
@@ -64,7 +63,7 @@ export class RealtimeSimulator {
       case 'inventory':
         return this.generateInventoryEvent(products);
       case 'customer':
-        return this.generateCustomerEvent(customers);
+        return this.generateCustomerEvent();
       default:
         return this.generateOrderEvent();
     }
@@ -106,7 +105,7 @@ export class RealtimeSimulator {
     };
   }
 
-  private generateCustomerEvent(customers: Customer[]): RealtimeEvent {
+  private generateCustomerEvent(): RealtimeEvent {
     const city = CITIES[Math.floor(Math.random() * CITIES.length)];
     const categories = ['laptops', 'smartphones', 'audio', 'accessories'];
     const category = categories[Math.floor(Math.random() * categories.length)];
@@ -124,15 +123,15 @@ export class RealtimeSimulator {
     };
   }
 
-  start(callback: (event: RealtimeEvent) => void, products: Product[], customers: Customer[]) {
+  start(callback: (event: RealtimeEvent) => void, products: Product[]) {
     // Generate initial event immediately
-    callback(this.generateEvent(products, customers));
+    callback(this.generateEvent(products));
     
     // Then generate events at random intervals
     const scheduleNext = () => {
       const delay = Math.random() * 15000 + 5000; // 5-20 seconds
       this.intervalId = setTimeout(() => {
-        callback(this.generateEvent(products, customers));
+        callback(this.generateEvent(products));
         scheduleNext();
       }, delay);
     };

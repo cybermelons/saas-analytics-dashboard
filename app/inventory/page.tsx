@@ -8,13 +8,13 @@ import { Badge } from "@/components/ui/badge"
 import { Progress } from "@/components/ui/progress"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Package, AlertTriangle, TrendingUp, Search, Filter } from "lucide-react"
+import { AlertTriangle, Search, Filter } from "lucide-react"
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts"
 
 export default function InventoryPage() {
   const { products, initializeData } = useEcommerceStore();
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory] = useState<string | null>(null);
 
   useEffect(() => {
     if (products.length === 0) {
@@ -34,7 +34,7 @@ export default function InventoryPage() {
   const totalValue = products.reduce((sum, p) => sum + (p.stock * p.cost), 0);
   const lowStockCount = products.filter(p => p.stock <= p.reorderPoint).length;
   const outOfStockCount = products.filter(p => p.stock === 0).length;
-  const categories = [...new Set(products.map(p => p.category))];
+  const categories = Array.from(new Set(products.map(p => p.category)));
 
   // Prepare data for inventory by category chart
   const categoryData = categories.map(category => {
@@ -214,7 +214,7 @@ export default function InventoryPage() {
                           <p className="font-medium">{product.name}</p>
                           <p className="text-sm text-muted-foreground">{product.sku}</p>
                         </div>
-                        <Badge variant={status.color as any}>{status.label}</Badge>
+                        <Badge variant={status.color as "default" | "secondary" | "destructive" | "outline" | "success" | "warning"}>{status.label}</Badge>
                         <Badge variant="outline">{product.category}</Badge>
                       </div>
                       <div className="text-right">

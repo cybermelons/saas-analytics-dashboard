@@ -3,7 +3,6 @@ import {
   Order, 
   Customer, 
   DashboardMetrics,
-  ProductCategory,
   CustomerSegment,
   SalesChannel,
   OrderStatus,
