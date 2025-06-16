@@ -52,25 +52,27 @@ export default function DashboardPage() {
   return (
     <DashboardLayout>
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-3xl font-bold tracking-tight">TechGear Pro Analytics</h1>
-            <p className="text-muted-foreground">
-              Real-time insights for your electronics retail business
-            </p>
+        <div className="relative overflow-hidden rounded-lg gradient-subtle p-6 -m-6 mb-0">
+          <div className="relative z-10 flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold tracking-tight">TechGear Pro Analytics</h1>
+              <p className="text-muted-foreground">
+                Real-time insights for your electronics retail business
+              </p>
+            </div>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                clearAllData();
+                setTimeout(() => initializeData(), 100);
+              }}
+              className="gap-2 btn-hover"
+            >
+              <RefreshCw className="h-4 w-4" />
+              Reset Demo Data
+            </Button>
           </div>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => {
-              clearAllData();
-              setTimeout(() => initializeData(), 100);
-            }}
-            className="gap-2"
-          >
-            <RefreshCw className="h-4 w-4" />
-            Reset Demo Data
-          </Button>
         </div>
 
         {/* Key Metrics with Animation */}

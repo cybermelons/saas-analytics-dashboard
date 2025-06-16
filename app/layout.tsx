@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -18,6 +19,13 @@ export const metadata: Metadata = {
   description: "Real-time analytics and insights for electronics retailers. Track revenue, inventory, and customer metrics across all channels.",
   keywords: "e-commerce dashboard, analytics, real-time data, inventory management, revenue tracking, electronics retail",
   authors: [{ name: "TechGear Pro Team" }],
+  manifest: "/manifest.json",
+  icons: {
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "any" }
+    ],
+  },
   openGraph: {
     title: "TechGear Pro - E-commerce Analytics Dashboard",
     description: "Real-time analytics and insights for electronics retailers",
@@ -49,11 +57,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -1,0 +1,39 @@
+{
+  "name": "TechGear Pro Analytics",
+  "short_name": "TechGear Pro",
+  "description": "Real-time analytics dashboard for electronics retailers",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["business", "productivity", "analytics"],
+  "screenshots": [
+    {
+      "src": "/screenshots/dashboard.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Dashboard Overview"
+    },
+    {
+      "src": "/screenshots/analytics.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "label": "Analytics View"
+    }
+  ]
+}

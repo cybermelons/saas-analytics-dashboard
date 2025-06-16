@@ -55,16 +55,19 @@ export function LiveOrderFeed() {
   };
 
   return (
-    <Card className="h-full">
-      <CardHeader>
+    <Card className="h-full glass relative overflow-hidden">
+      <div className="absolute inset-0 gradient-subtle opacity-50" />
+      <CardHeader className="relative z-10">
         <div className="flex items-center justify-between">
           <div>
             <CardTitle>Live Activity Feed</CardTitle>
             <CardDescription>Real-time store events</CardDescription>
           </div>
           <div className="flex items-center gap-2">
-            <Circle className={`h-3 w-3 ${isLive ? 'fill-green-500 text-green-500' : 'fill-gray-400 text-gray-400'} animate-pulse`} />
-            <span className="text-sm font-medium">{isLive ? 'LIVE' : 'PAUSED'}</span>
+            <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-primary/10">
+              <Circle className={`h-3 w-3 ${isLive ? 'fill-green-500 text-green-500' : 'fill-gray-400 text-gray-400'} animate-pulse`} />
+              <span className="text-sm font-medium">{isLive ? 'LIVE' : 'PAUSED'}</span>
+            </div>
           </div>
         </div>
       </CardHeader>

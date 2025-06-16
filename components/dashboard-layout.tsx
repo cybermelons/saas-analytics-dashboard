@@ -16,6 +16,7 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { ThemeToggle } from "@/components/theme-toggle"
 import {
   BarChart3,
   Home,
@@ -84,7 +85,9 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
       <Sidebar>
         <SidebarHeader>
           <div className="flex items-center gap-2 px-2 py-1.5">
-            <BarChart3 className="h-6 w-6 text-blue-600" />
+            <div className="p-2 rounded-lg gradient-primary">
+              <BarChart3 className="h-6 w-6 text-white" />
+            </div>
             <span className="font-semibold text-lg">TechGear Pro</span>
           </div>
         </SidebarHeader>
@@ -147,6 +150,7 @@ export function DashboardLayout({ children }: { children: ReactNode }) {
         <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4">
           <SidebarTrigger />
           <div className="flex-1" />
+          <ThemeToggle />
         </header>
         <main className="flex-1 overflow-auto p-6">{children}</main>
       </SidebarInset>
