@@ -140,10 +140,11 @@ When showing the dashboard:
 - **Load Time**: <2 seconds globally
 - **Bundle Size**: Optimized with code splitting
 
-### Scale
-- **Data Points**: Handles 100k+ events/day
+### What This Demo Shows
+- **Technical Capability**: Modern tech stack implementation
 - **Charts**: 15+ visualization types
 - **Responsiveness**: Works on all devices
+- **Design Skills**: Professional UI/UX with animations
 
 ### Business Impact
 - **Target Market**: Mid-size e-commerce ($50k-$500k/month)
